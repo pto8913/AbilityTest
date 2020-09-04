@@ -22,9 +22,10 @@ ACharacterBase::ACharacterBase(const FObjectInitializer& ObjectInitializer)
 	//PrimaryActorTick.bCanEverTick = true;
 
 	AbilitySystemComp = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilityComp"));
-	AbilitySystemComp->ReplicationMode = EGameplayEffectReplicationMode::Full;
+	AbilitySystemComp->ReplicationMode = EGameplayEffectReplicationMode::Minimal;
 
 	AttributeSet = CreateDefaultSubobject<UptoAttributeSet>(TEXT("AttributeSet"));
+
 	GetCapsuleComponent()->OnComponentHit.AddDynamic(this, &ACharacterBase::OnCompHit);
 }
 
@@ -124,6 +125,7 @@ float ACharacterBase::GetStamina() const
 	{
 		return AttributeSet->GetStamina();
 	}
+	UE_LOG(LogTemp, Log, TEXT("AttributeSet is null in Stamina"));
 	return 1.f;
 }
 
@@ -133,6 +135,7 @@ float ACharacterBase::GetMaxStamina() const
 	{
 		return AttributeSet->GetMaxStamina();
 	}
+	UE_LOG(LogTemp, Log, TEXT("AttributeSet is null in MaxStamina"));
 	return 1.f;
 }
 
@@ -142,6 +145,7 @@ float ACharacterBase::GetHealth() const
 	{
 		return AttributeSet->GetHealth();
 	}
+	UE_LOG(LogTemp, Log, TEXT("AttributeSet is null in Health"));
 	return 1.f;
 }
 
@@ -151,6 +155,7 @@ float ACharacterBase::GetMaxHealth() const
 	{
 		return AttributeSet->GetMaxHealth();
 	}
+	UE_LOG(LogTemp, Log, TEXT("AttributeSet is null in MaxHealth"));
 	return 1.f;
 }
 
@@ -160,6 +165,7 @@ float ACharacterBase::GetDefensePower() const
 	{
 		return AttributeSet->GetDefensePower();
 	}
+	UE_LOG(LogTemp, Log, TEXT("AttributeSet is null in DFS"));
 	return 1.f;
 }
 

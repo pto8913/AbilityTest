@@ -25,6 +25,9 @@ public:
 	/* Implement IAbilitySystemInterface */
 	UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability")
+		UptoAttributeSet* AttributeSet;
+
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_Controller() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -56,8 +59,7 @@ protected:
 	UPROPERTY()
 		int32 bAbilitiesInitialized;
 
-	UPROPERTY()
-		UptoAttributeSet* AttributeSet;
+
 	// End Init
 
 	UFUNCTION(BlueprintImplementableEvent)

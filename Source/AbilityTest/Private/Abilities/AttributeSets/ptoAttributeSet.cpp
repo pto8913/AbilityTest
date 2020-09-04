@@ -129,6 +129,15 @@ void UptoAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 			TargetCharacter->HandleHealthChanged(DeltaValue, SourceTags);
 		}
 	}
+	else if (Data.EvaluatedData.Attribute == GetMaxHealthAttribute())
+	{
+		SetMaxHealth(FMath::Clamp(GetMaxHealth(), 0.f, GetMaxHealth()));
+
+		if (IsValid(TargetCharacter) == true)
+		{
+			TargetCharacter->HandleHealthChanged(DeltaValue, SourceTags);
+		}
+	}
 	else if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
 	{
 		SetStamina(FMath::Clamp(GetStamina(), 0.f, GetMaxStamina()));
